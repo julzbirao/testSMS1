@@ -1,188 +1,247 @@
-<?php
+<?php 
 session_start();
-error_reporting(0);
 include('includes/config.php');
-if($_SESSION['alogin']!=''){
-$_SESSION['alogin']='';
-}
-if(isset($_POST['login']))
-{
-$uname=$_POST['username'];
-$password=md5($_POST['password']);
-$sql ="SELECT UserName,Password FROM admin WHERE UserName=:uname and Password=:password";
-$query= $dbh -> prepare($sql);
-$query-> bindParam(':uname', $uname, PDO::PARAM_STR);
-$query-> bindParam(':password', $password, PDO::PARAM_STR);
-$query-> execute();
-$results=$query->fetchAll(PDO::FETCH_OBJ);
-if($query->rowCount() > 0)
-{
-$_SESSION['alogin']=$_POST['username'];
-echo "<script type='text/javascript'> document.location = 'dashboard.php'; </script>";
-} else{
-    
-    echo "<script>alert('Unknown Uname and Password');</script>";
-
-}
-
-}
+error_reporting(0);
 
 ?>
 
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    	<meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Admin Login</title>
-        <link rel="stylesheet" href="css/bootstrap.min.css" media="screen" >
-        <link rel="stylesheet" href="css/font-awesome.min.css" media="screen" >
-        <link rel="stylesheet" href="css/animate-css/animate.min.css" media="screen" >
-        <link rel="stylesheet" href="css/prism/prism.css" media="screen" > 
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="keywords" content="">
+<meta name="description" content="">
+<title>Car Rental Portal</title>
+<!--Bootstrap -->
+<link rel="stylesheet" href="assets/css/bootstrap.min.css" type="text/css">
+<link rel="stylesheet" href="assets/css/style.css" type="text/css">
+<link rel="stylesheet" href="assets/css/owl.carousel.css" type="text/css">
+<link rel="stylesheet" href="assets/css/owl.transitions.css" type="text/css">
+<link href="assets/css/slick.css" rel="stylesheet">
+<link href="assets/css/bootstrap-slider.min.css" rel="stylesheet">
+<link href="assets/css/font-awesome.min.css" rel="stylesheet">
+		<link rel="stylesheet" id="switcher-css" type="text/css" href="assets/switcher/css/switcher.css" media="all" />
+		<link rel="alternate stylesheet" type="text/css" href="assets/switcher/css/red.css" title="red" media="all" data-default-color="true" />
+		<link rel="alternate stylesheet" type="text/css" href="assets/switcher/css/orange.css" title="orange" media="all" />
+		<link rel="alternate stylesheet" type="text/css" href="assets/switcher/css/blue.css" title="blue" media="all" />
+		<link rel="alternate stylesheet" type="text/css" href="assets/switcher/css/pink.css" title="pink" media="all" />
+		<link rel="alternate stylesheet" type="text/css" href="assets/switcher/css/green.css" title="green" media="all" />
+		<link rel="alternate stylesheet" type="text/css" href="assets/switcher/css/purple.css" title="purple" media="all" />
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/images/favicon-icon/apple-touch-icon-144-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/images/favicon-icon/apple-touch-icon-114-precomposed.html">
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/images/favicon-icon/apple-touch-icon-72-precomposed.png">
+<link rel="apple-touch-icon-precomposed" href="assets/images/favicon-icon/apple-touch-icon-57-precomposed.png">
+<link rel="shortcut icon" href="assets/images/favicon-icon/favicon.png">
+<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet"> 
+</head>
+<body>
+
+<!-- Start Switcher -->
+<?php include('includes/colorswitcher.php');?>
+<!-- /Switcher -->  
         
-        <link rel="stylesheet" href="css/main.css" media="screen" >
-        <script src="js/modernizr/modernizr.min.js"></script>
-    </head>
-    <body class="">
-        <div class="main-wrapper">
+<!--Header-->
+<?php include('includes/header.php');?>
+<!-- /Header --> 
 
-            <div class="">
-                <div class="row">
- <h1 align="center">Student Result Management System</h1>
-                    <div class="col-lg-6 visible-lg-block">
-
-<section class="section">
-                            <div class="row mt-40">
-                                <div class="col-md-10 col-md-offset-1 pt-50">
-
-                                    <div class="row mt-30 ">
-                                        <div class="col-md-11">
-                                            <div class="panel">
-                                                <div class="panel-heading">
-                                                    <div class="panel-title text-center">
-                                                        <h4>For Students</h4>
-                                                    </div>
-                                                </div>
-                                                <div class="panel-body p-20">
-
-                                                    <div class="section-title">
-                                                        <p class="sub-title">Student Result Management System</p>
-                                                    </div>
-
-                                                    <form class="form-horizontal" method="post">
-                                                        <div class="form-group">
-                                                            <label for="inputEmail3" class="col-sm-6 control-label">Search your result</label>
-                                                            <div class="col-sm-6">
-                                                               <a href="find-result.php">click here</a>
-                                                            </div>
-                                                        </div>
-                                                       
-                                                    </form>
-
-                                            
-
-                                                 
-                                                </div>
-                                            </div>
-                                            <!-- /.panel -->
-                                      
-                                        </div>
-                                        <!-- /.col-md-11 -->
-                                    </div>
-                                    <!-- /.row -->
-                                </div>
-                                <!-- /.col-md-12 -->
-                            </div>
-                            <!-- /.row -->
-                        </section>
-                    </div>
-                    <div class="col-lg-6">
-                        <section class="section">
-                            <div class="row mt-40">
-                                <div class="col-md-10 col-md-offset-1 pt-50">
-
-                                    <div class="row mt-30 ">
-                                        <div class="col-md-11">
-                                            <div class="panel">
-                                                <div class="panel-heading">
-                                                    <div class="panel-title text-center">
-                                                        <h4>Admin Login</h4>
-                                                    </div>
-                                                </div>
-                                                <div class="panel-body p-20">
-
-                                                    <div class="section-title">
-                                                        <p class="sub-title">Student Result Management System</p>
-                                                    </div>
-
-                                                    <form class="form-horizontal" method="post">
-                                                    	<div class="form-group">
-                                                    		<label for="inputEmail3" class="col-sm-2 control-label">Email</label>
-                                                    		<div class="col-sm-10">
-                                                    			<input type="text" name="username" class="form-control" id="inputEmail3" placeholder="UserName">
-                                                    		</div>
-                                                    	</div>
-                                                    	<div class="form-group">
-                                                    		<label for="inputPassword3" class="col-sm-2 control-label">Password</label>
-                                                    		<div class="col-sm-10">
-                                                    			<input type="password" name="password" class="form-control" id="inputPassword3" placeholder="Password">
-                                                    		</div>
-                                                    	</div>
-                                                    
-                                                        <div class="form-group mt-20">
-                                                    		<div class="col-sm-offset-2 col-sm-10">
-                                                           
-                                                    			<button type="submit" name="login" class="btn btn-success btn-labeled pull-right">Sign in<span class="btn-label btn-label-right"><i class="fa fa-check"></i></span></button>
-                                                    		</div>
-                                                    	</div>
-                                                    </form>
-
-                                            
-
-                                                 
-                                                </div>
-                                            </div>
-                                            <!-- /.panel -->
-                                            <p class="text-muted text-center"><small>Copyright © SRMS</small></p>
-                                        </div>
-                                        <!-- /.col-md-11 -->
-                                    </div>
-                                    <!-- /.row -->
-                                </div>
-                                <!-- /.col-md-12 -->
-                            </div>
-                            <!-- /.row -->
-                        </section>
-
-                    </div>
-                    <!-- /.col-md-6 -->
-                </div>
-                <!-- /.row -->
-            </div>
-            <!-- /. -->
-
+<!-- Banners -->
+<section id="banner" class="banner-section">
+  <div class="container">
+    <div class="div_zindex">
+      <div class="row">
+        <div class="col-md-5 col-md-push-7">
+          <div class="banner_content">
+            <h1>Find the right car for you.</h1>
+            <p>We have more than a thousand cars for you to choose. </p>
+            <a href="#" class="btn">Read More <span class="angle_arrow"><i class="fa fa-angle-right" aria-hidden="true"></i></span></a> </div>
         </div>
-        <!-- /.main-wrapper -->
+      </div>
+    </div>
+  </div>
+</section>
+<!-- /Banners --> 
 
-        <!-- ========== COMMON JS FILES ========== -->
-        <script src="js/jquery/jquery-2.2.4.min.js"></script>
-        <script src="js/jquery-ui/jquery-ui.min.js"></script>
-        <script src="js/bootstrap/bootstrap.min.js"></script>
-        <script src="js/pace/pace.min.js"></script>
-        <script src="js/lobipanel/lobipanel.min.js"></script>
-        <script src="js/iscroll/iscroll.js"></script>
 
-        <!-- ========== PAGE JS FILES ========== -->
+<!-- Resent Cat-->
+<section class="section-padding gray-bg">
+  <div class="container">
+    <div class="section-header text-center">
+      <h2>Find the Best <span>CarForYou</span></h2>
+      <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.</p>
+    </div>
+    <div class="row"> 
+      
+      <!-- Nav tabs -->
+      <div class="recent-tab">
+        <ul class="nav nav-tabs" role="tablist">
+          <li role="presentation" class="active"><a href="#resentnewcar" role="tab" data-toggle="tab">New Car</a></li>
+        </ul>
+      </div>
+      <!-- Recently Listed New Cars -->
+      <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="resentnewcar">
 
-        <!-- ========== THEME JS ========== -->
-        <script src="js/main.js"></script>
-        <script>
-            $(function(){
+<?php $sql = "SELECT tblvehicles.VehiclesTitle,tblbrands.BrandName,tblvehicles.PricePerDay,tblvehicles.FuelType,tblvehicles.ModelYear,tblvehicles.id,tblvehicles.SeatingCapacity,tblvehicles.VehiclesOverview,tblvehicles.Vimage1 from tblvehicles join tblbrands on tblbrands.id=tblvehicles.VehiclesBrand";
+$query = $dbh -> prepare($sql);
+$query->execute();
+$results=$query->fetchAll(PDO::FETCH_OBJ);
+$cnt=1;
+if($query->rowCount() > 0)
+{
+foreach($results as $result)
+{  
+?>  
 
-            });
-        </script>
+<div class="col-list-3">
+<div class="recent-car-list">
+<div class="car-info-box"> <a href="vehical-details.php?vhid=<?php echo htmlentities($result->id);?>"><img src="admin/img/vehicleimages/<?php echo htmlentities($result->Vimage1);?>" class="img-responsive" alt="image"></a>
+<ul>
+<li><i class="fa fa-car" aria-hidden="true"></i><?php echo htmlentities($result->FuelType);?></li>
+<li><i class="fa fa-calendar" aria-hidden="true"></i><?php echo htmlentities($result->ModelYear);?> Model</li>
+<li><i class="fa fa-user" aria-hidden="true"></i><?php echo htmlentities($result->SeatingCapacity);?> seats</li>
+</ul>
+</div>
+<div class="car-title-m">
+<h6><a href="vehical-details.php?vhid=<?php echo htmlentities($result->id);?>"><?php echo htmlentities($result->BrandName);?> , <?php echo htmlentities($result->VehiclesTitle);?></a></h6>
+<span class="price">$<?php echo htmlentities($result->PricePerDay);?> /Day</span> 
+</div>
+<div class="inventory_info_m">
+<p><?php echo substr($result->VehiclesOverview,0,70);?></p>
+</div>
+</div>
+</div>
+<?php }}?>
+       
+      </div>
+    </div>
+  </div>
+</section>
+<!-- /Resent Cat --> 
 
-        <!-- ==========  ========== -->
-    </body>
+<!-- Fun Facts-->
+<section class="fun-facts-section">
+  <div class="container div_zindex">
+    <div class="row">
+      <div class="col-lg-3 col-xs-6 col-sm-3">
+        <div class="fun-facts-m">
+          <div class="cell">
+            <h2><i class="fa fa-calendar" aria-hidden="true"></i>40+</h2>
+            <p>Years In Business</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-xs-6 col-sm-3">
+        <div class="fun-facts-m">
+          <div class="cell">
+            <h2><i class="fa fa-car" aria-hidden="true"></i>1200+</h2>
+            <p>New Cars For Sale</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-xs-6 col-sm-3">
+        <div class="fun-facts-m">
+          <div class="cell">
+            <h2><i class="fa fa-car" aria-hidden="true"></i>1000+</h2>
+            <p>Used Cars For Sale</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-xs-6 col-sm-3">
+        <div class="fun-facts-m">
+          <div class="cell">
+            <h2><i class="fa fa-user-circle-o" aria-hidden="true"></i>600+</h2>
+            <p>Satisfied Customers</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Dark Overlay-->
+  <div class="dark-overlay"></div>
+</section>
+<!-- /Fun Facts--> 
+
+
+<!--Testimonial -->
+<section class="section-padding testimonial-section parallex-bg">
+  <div class="container div_zindex">
+    <div class="section-header white-text text-center">
+      <h2>Our Satisfied <span>Customers</span></h2>
+    </div>
+    <div class="row">
+      <div id="testimonial-slider">
+<?php 
+$tid=1;
+$sql = "SELECT tbltestimonial.Testimonial,tblusers.FullName from tbltestimonial join tblusers on tbltestimonial.UserEmail=tblusers.EmailId where tbltestimonial.status=:tid";
+$query = $dbh -> prepare($sql);
+$query->bindParam(':tid',$tid, PDO::PARAM_STR);
+$query->execute();
+$results=$query->fetchAll(PDO::FETCH_OBJ);
+$cnt=1;
+if($query->rowCount() > 0)
+{
+foreach($results as $result)
+{  ?>
+
+
+        <div class="testimonial-m">
+ 
+          <div class="testimonial-content">
+            <div class="testimonial-heading">
+              <h5><?php echo htmlentities($result->FullName);?></h5>
+            <p><?php echo htmlentities($result->Testimonial);?></p>
+          </div>
+        </div>
+        </div>
+        <?php }} ?>
+        
+       
+  
+      </div>
+    </div>
+  </div>
+  <!-- Dark Overlay-->
+  <div class="dark-overlay"></div>
+</section>
+<!-- /Testimonial--> 
+
+
+<!--Footer -->
+<?php include('includes/footer.php');?>
+<!-- /Footer--> 
+
+<!--Back to top-->
+<div id="back-top" class="back-top"> <a href="#top"><i class="fa fa-angle-up" aria-hidden="true"></i> </a> </div>
+<!--/Back to top--> 
+
+<!--Login-Form -->
+<?php include('includes/login.php');?>
+<!--/Login-Form --> 
+
+<!--Register-Form -->
+<?php include('includes/registration.php');?>
+
+<!--/Register-Form --> 
+
+<!--Forgot-password-Form -->
+<?php include('includes/forgotpassword.php');?>
+<!--/Forgot-password-Form --> 
+
+<!-- Scripts --> 
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script> 
+<script src="assets/js/interface.js"></script> 
+<!--Switcher-->
+<script src="assets/switcher/js/switcher.js"></script>
+<!--bootstrap-slider-JS--> 
+<script src="assets/js/bootstrap-slider.min.js"></script> 
+<!--Slider-JS--> 
+<script src="assets/js/slick.min.js"></script> 
+<script src="assets/js/owl.carousel.min.js"></script>
+
+</body>
+
+<!-- Mirrored from themes.webmasterdriver.net/carforyou/demo/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 16 Jun 2017 07:22:11 GMT -->
 </html>
